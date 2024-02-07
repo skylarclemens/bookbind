@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <h1>Bookbind</h1>
+      <p>Bookbind</p>
     </>
   )
 }
