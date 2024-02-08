@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Book } from '../../data/definitions';
 import style from './search.module.css';
 import { useStore } from '../../data/useStore';
+import useClickOut from '../../hooks/useClickOut';
 
 interface BookResult {
   id: string,
@@ -26,6 +27,10 @@ const Search = () => {
   const books = useStore((state) => state.books)
   const addBook = useStore((state) => state.addBook);
   const removeBook = useStore((state) => state.removeBook);
+  const searchResultsList = useRef(null);
+  useClickOut(searchResultsList, () => {
+    setSearchData([]);
+  })
 
   const baseUrl = "https://www.googleapis.com/books/v1/volumes";
   const apiKey = import.meta.env.VITE_GOOGLE_KEY;
@@ -76,7 +81,7 @@ const Search = () => {
   return(
     <div className={style.container}>
       <input type="search" placeholder="Search" name="search" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-      <ul className={`${style.searchResults} ${searchData.length ? '' : style.empty}`}>
+      <ul ref={searchResultsList} className={`${style.searchResults} ${searchData.length ? '' : style.empty}`}>
         {searchData.map((book: BookResult) => {
           const coverImage = book.volumeInfo?.imageLinks?.thumbnail;
           const listItem = book.volumeInfo.title ?
