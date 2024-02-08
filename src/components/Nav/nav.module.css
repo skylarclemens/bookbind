@@ -1,0 +1,40 @@
+.container {
+  height: 58px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(151, 148, 143, 0.25);
+}
+
+.logo {
+  font-family: OpenRunde, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #ffffff;
+  & :hover {
+    color: #ffffff;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  .logo {
+    color: #213547;
+    & :hover {
+      color: #213547;
+    }
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
