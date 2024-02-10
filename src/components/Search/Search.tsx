@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Book } from '../../data/definitions';
 import style from './search.module.css';
 import { useStore } from '../../data/useStore';
 import useClickOut from '../../hooks/useClickOut';
 import { Link } from 'react-router-dom';
+import { mapToBook } from '../../helpers/mapToBook';
 
 export interface BookResult {
   id: string,
@@ -59,25 +59,6 @@ const Search = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
-
-  const mapToBook = (bookResult: BookResult): Book => {
-    const info = bookResult.volumeInfo;
-    const book: Book = {
-      id: bookResult.id,
-      title: info.title,
-      subtitle: info.subtitle,
-      authors: info.authors,
-      categories: info.categories,
-      description: info.description,
-      images: {
-        thumbnail: info.imageLinks.thumbnail
-      },
-      publishedDate: info.publishedDate,
-      publisher: info.publisher,
-      pageCount: info.pageCount
-    }
-    return book;
-  }
 
   return(
     <div className={style.container}>
