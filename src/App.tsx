@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import './App.css';
-import Home from './pages/Home';
+import style from './app.module.css';
 import Auth from './pages/Auth';
 import { supabase } from './supabaseClient'
 import { useState } from 'react';
 import { useUserStore } from './data/useStore';
 import { Session } from '@supabase/supabase-js';
+import { Outlet } from 'react-router-dom';
+import Nav from './components/Nav/Nav';
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -30,9 +31,14 @@ function App() {
   }, []);
 
   if (!session) {
-    return (<Auth />)
-  } else {
-    return (<><Home /></>)
+    return <Auth />
+  } else  {
+    return (
+      <div className={style.container}>
+        <Nav />
+        <Outlet />
+      </div>
+    )
   }
 }
 

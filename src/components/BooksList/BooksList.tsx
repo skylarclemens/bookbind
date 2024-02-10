@@ -1,7 +1,7 @@
 import style from './bookslist.module.css';
 import { useStore } from '../../data/useStore';
 import { Book } from '../../data/definitions';
-import BookDetails from './BookDetails/BookDetails';
+import BookRow from './BookRow/BookRow';
 
 const BooksList = () => {
   const books = useStore((state) => state.books)
@@ -9,7 +9,7 @@ const BooksList = () => {
   return (
     <div className={style.container}>
       {books.map((book: Book) => {
-        return <BookDetails book={book} key={book.id} />
+        return <BookRow book={book} key={book.id} />
       })}
     </div>
   )
