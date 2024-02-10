@@ -10,9 +10,9 @@ export const mapToBook = (bookResult: BookResult): Book => {
     authors: info.authors,
     categories: info.categories,
     description: info.description,
-    images: {
-      thumbnail: info.imageLinks.thumbnail
-    },
+    isbn: info.industryIdentifiers,
+    type: info.printType,
+    images: info.imageLinks,
     publishedDate: info.publishedDate,
     publisher: info.publisher,
     pageCount: info.pageCount

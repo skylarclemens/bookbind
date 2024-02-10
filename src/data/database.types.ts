@@ -15,9 +15,10 @@ export type Database = {
           book_type: string | null
           categories: string[] | null
           created_at: string
+          google_id: string | null
           id: string
-          image: string | null
-          isbn: string | null
+          images: Json | null
+          isbn: Json | null
           page_count: number | null
           published_date: string | null
           publisher: string | null
@@ -29,9 +30,10 @@ export type Database = {
           book_type?: string | null
           categories?: string[] | null
           created_at?: string
+          google_id?: string | null
           id?: string
-          image?: string | null
-          isbn?: string | null
+          images?: Json | null
+          isbn?: Json | null
           page_count?: number | null
           published_date?: string | null
           publisher?: string | null
@@ -43,9 +45,10 @@ export type Database = {
           book_type?: string | null
           categories?: string[] | null
           created_at?: string
+          google_id?: string | null
           id?: string
-          image?: string | null
-          isbn?: string | null
+          images?: Json | null
+          isbn?: Json | null
           page_count?: number | null
           published_date?: string | null
           publisher?: string | null

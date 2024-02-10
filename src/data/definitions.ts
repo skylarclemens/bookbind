@@ -5,9 +5,15 @@ export interface Book {
   authors: string[],
   categories: string[],
   description: string,
+  isbn: string[],
+  type: string,
   images: {
-    thumbnail: string
-  },
+    small: string,
+    medium: string,
+    large: string,
+    smallThumbnail: string,
+    thumbnail: string,
+  }
   publishedDate: string,
   publisher: string,
   pageCount: number,

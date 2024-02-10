@@ -12,9 +12,15 @@ export interface BookResult {
     categories: string[],
     description: string,
     imageLinks: {
+      small: string,
+      medium: string,
+      large: string,
+      smallThumbnail: string,
       thumbnail: string
     },
+    printType: string,
     publishedDate: string,
+    industryIdentifiers: string[],
     publisher: string,
     pageCount: number,
     subtitle: string,
