@@ -8,6 +8,8 @@
   width: 100%;
   padding: 0 1rem;
   border-bottom: 1px solid rgba(151, 148, 143, 0.25);
+  background: var(--bg-color);
+  z-index: 1;
 }
 
 .nav-left {
