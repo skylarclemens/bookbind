@@ -15,7 +15,8 @@ export const mapToBook = (bookResult: BookResult): Book => {
     images: info.imageLinks,
     publishedDate: info.publishedDate,
     publisher: info.publisher,
-    pageCount: info.pageCount
+    pageCount: info.pageCount,
+    google_id: bookResult.id,
   }
   return book;
 };

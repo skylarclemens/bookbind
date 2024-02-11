@@ -3,13 +3,14 @@ import { useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { BookResult } from '../../components/Search/Search';
 import { useStore, useUserStore } from '../../data/useStore';
-import { Book } from '../../data/definitions';
+import { Book, UserBook } from '../../data/definitions';
 import { mapToBook } from '../../helpers/mapToBook';
 import { addBookToDb, removeBookFromDb } from '../../services/bookService';
 
 const BookDetails = () => {
   const bookResult = useLoaderData() as BookResult;
   const [book, setBook] = useState<Book>();
+  const [userBookInfo, setUserBookInfo] = useState<UserBook>();
   const books = useStore((state) => state.books);
   const addBook = useStore((state) => state.addBook);
   const removeBook = useStore((state) => state.removeBook);
@@ -20,21 +21,28 @@ const BookDetails = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookResult]);
 
+  useEffect(() => {
+    if (book) {
+      const bookInfo = books.find((el) => el.book.google_id === book.id);
+      if (bookInfo) setUserBookInfo(bookInfo);
+    }
+  }, [book, books]);
+
   if (!book) {
     return 'Loading...';
   }
 
-  const addCurrentBook = (book: Book) => {
+  const addCurrentBook = async (book: Book) => {
     if (user) {
-      addBookToDb(book, user.id);
-      addBook(book);
+      const newUserBook: UserBook = await addBookToDb(book, user.id);
+      addBook(newUserBook);
     }
   }
 
-  const removeCurrentBook = (book: Book) => {
-    if (user) {
-      removeBookFromDb(book.id);
-      removeBook(book);
+  const removeCurrentBook = (userBook?: UserBook) => {
+    if (user && userBook) {
+      removeBookFromDb(userBook.book.id);
+      removeBook(userBook);
     }
   }
 
@@ -45,8 +53,8 @@ const BookDetails = () => {
           <div className={style.coverContainer}>
             <img className={style.cover} src={book.images.thumbnail} alt={`${book.title} book cover`} />
           </div>
-          {books.length && books.findIndex(el => el.id === book.id) > -1 ?
-            (<button className="cta" onClick={() => removeCurrentBook(book)}>Remove</button>) :
+          {books.length && books.findIndex(el => el.book.google_id === bookResult.id) > -1 ?
+            (<button className="cta" onClick={() => removeCurrentBook(userBookInfo)}>Remove</button>) :
             (<button className="cta" onClick={() => addCurrentBook(book)}>Add</button>)
           }
         </div>

@@ -5,7 +5,7 @@ import style from './bookrow.module.css';
 const BookRow = ({ book }: { book: Book }) => {
   return (
     <div className={style.container}>
-      <Link to={`/books/${book.id}`}>
+      <Link to={`/book/${book.google_id}`}>
         <div className={style.coverContainer}>
           <img className={style.coverImage} src={book.images.thumbnail} alt={`${book.title} cover`} />
         </div>

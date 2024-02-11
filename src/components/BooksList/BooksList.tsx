@@ -1,6 +1,6 @@
 import style from './bookslist.module.css';
 import { useStore } from '../../data/useStore';
-import { Book } from '../../data/definitions';
+import { UserBook } from '../../data/definitions';
 import BookRow from './BookRow/BookRow';
 
 const BooksList = () => {
@@ -8,8 +8,8 @@ const BooksList = () => {
 
   return (
     <div className={style.container}>
-      {books.map((book: Book) => {
-        return <BookRow book={book} key={book.id} />
+      {books.map((userBook: UserBook) => {
+        return <BookRow book={userBook.book} key={userBook.book_id} />
       })}
     </div>
   )

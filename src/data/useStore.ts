@@ -1,11 +1,13 @@
 import { create } from 'zustand';
-import { Book } from './definitions';
+import { UserBook } from './definitions';
 import { User } from '@supabase/supabase-js';
 
 interface Store {
-  books: Book[],
-  addBook: (book: Book) => void,
-  removeBook: (book: Book) => void,
+  books: UserBook[],
+  initializeBooks: (books: UserBook[]) => void,
+  addBook: (book: UserBook) => void,
+  addBooks: (books: UserBook[]) => void,
+  removeBook: (book: UserBook) => void,
   removeAllBooks: () => void
 }
 
@@ -17,8 +19,10 @@ interface UserStore {
 
 export const useStore = create<Store>((set) => ({
   books: [],
-  addBook: (book: Book) => set((state) => ({ books: [...state.books, book] })),
-  removeBook: (book: Book) => set((state) => ({ books: state.books.filter((curr) => curr.id !== book.id)})),
+  initializeBooks: (books: UserBook[]) => set(() => ({ books: books })),
+  addBook: (book: UserBook) => set((state) => ({ books: [...state.books, book] })),
+  addBooks: (books: UserBook[]) => set((state) => ({ books: [...state.books, ...books]})),
+  removeBook: (book: UserBook) => set((state) => ({ books: state.books.filter((curr) => curr.book_id !== book.book_id)})),
   removeAllBooks: () => set({ books: [] }),
 }))
 

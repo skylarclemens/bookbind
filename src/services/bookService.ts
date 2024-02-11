@@ -16,16 +16,17 @@ export const addBookToDb = async (book: Book, userId: string) => {
     google_id: book.id,
   }
 
-  const { data, error } = await supabase.from('books').upsert(newBook, {
-    onConflict: 'google_id', ignoreDuplicates: false,
-  }).select();
+  try {
+    const { data, error } = await supabase.from('books').upsert(newBook, {
+      onConflict: 'google_id', ignoreDuplicates: false,
+    }).select();
 
-  if (error) {
+    if (error) throw error;
+
+    return addUserBook(data[0].id, userId);
+  } catch (error) {
     console.error(error);
-    return;
   }
-
-  addUserBook(data[0].id, userId);
 }
 
 const addUserBook = async (bookId: string, userId: string) => {
@@ -34,12 +35,14 @@ const addUserBook = async (bookId: string, userId: string) => {
     user_id: userId
   }
 
-  const { error } = await supabase.from('user_book').insert(newUserBook).select();
+  const { data, error } = await supabase.from('user_book').insert(newUserBook).select('*, book: books(*)');
 
   if (error) {
     console.error(error);
     return;
   }
+
+  if (data) return data[0];
 }
 
 export const removeBookFromDb = async (bookId: string) => {
@@ -52,4 +55,16 @@ export const removeBookFromDb = async (bookId: string) => {
   } catch (error) {
     console.error(error);
   }
+}
+
+export const getUsersBooksData = async () => {
+    const { data, error } = await supabase.from('user_book')
+      .select('*, book: books(*)');
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    return data;
 }

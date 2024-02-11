@@ -3,16 +3,18 @@ import style from './app.module.css';
 import Auth from './pages/Auth';
 import { supabase } from './supabaseClient'
 import { useState } from 'react';
-import { useUserStore } from './data/useStore';
+import { useStore, useUserStore } from './data/useStore';
 import { Session, User } from '@supabase/supabase-js';
 import { Outlet } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
+import { getUsersBooksData } from './services/bookService';
 
 function App() {
   const [session, setSession] = useState<Session | null>(null);
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
   const removeUser = useUserStore((state) => state.removeUser);
+  const initializeBooks = useStore((state) => state.initializeBooks);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -44,6 +46,16 @@ function App() {
     return () => subscription.unsubscribe();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const getUserBooks = async () => {
+      const data = await getUsersBooksData();
+      if (data) initializeBooks(data);
+    }
+
+    if (user) getUserBooks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
 
   if (!session) {
     return <Auth />
