@@ -23,8 +23,14 @@ const BookDetails = () => {
 
   useEffect(() => {
     if (book) {
-      const bookInfo = books.find((el) => el.book.google_id === book.id);
-      if (bookInfo) setUserBookInfo(bookInfo);
+      const bookInfo = books.find((el) => {
+        return el.book.google_id === book.id
+      });
+      if (bookInfo) {
+        setUserBookInfo(bookInfo);
+      } else {
+        setUserBookInfo(undefined);
+      }
     }
   }, [book, books]);
 
@@ -46,6 +52,14 @@ const BookDetails = () => {
     }
   }
 
+  const formatCategories = (categories: string[]) => {
+    const newCategories = categories.map((category) => {
+      const str = category.split('/')
+      return str[1].trim();
+    });
+    return newCategories;
+  }
+
   return (
     <div className={style.container}>
       <div className={style.bookDetails}>
@@ -53,15 +67,22 @@ const BookDetails = () => {
           <div className={style.coverContainer}>
             <img className={style.cover} src={book.images.thumbnail} alt={`${book.title} book cover`} />
           </div>
-          {books.length && books.findIndex(el => el.book.google_id === bookResult.id) > -1 ?
+          {userBookInfo ?
             (<button className="cta" onClick={() => removeCurrentBook(userBookInfo)}>Remove</button>) :
             (<button className="cta" onClick={() => addCurrentBook(book)}>Add</button>)
           }
         </div>
         <div className={style.detailsRight}>
           <div className={style.title}>
-            <h1>{book?.title}</h1>
-            <h2>{book?.authors}</h2>
+            <h1>{book.title}</h1>
+            <h2>{book.authors}</h2>
+            <div className={style.categories}>
+              {formatCategories(book.categories).map((category, i) => {
+                return (<div className={style.category} key={`${category}-${i}`}>
+                  {category}
+                </div>)
+              })}
+            </div>
           </div>
           <div className={style.description}>
             <h3 className="subheadline">Description</h3>

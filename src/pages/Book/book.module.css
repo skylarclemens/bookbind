@@ -57,4 +57,21 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
+  .categories {
+    display: flex;
+    gap: 0.25rem;
+    padding-top: 0.5rem;
+    
+    .category {
+      border: 1px solid var(--border-color);
+      border-radius: 1rem;
+      background-color: var(--button-bg-color);
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--cta-font-color);
+    }
+  }
 }

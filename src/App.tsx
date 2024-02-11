@@ -17,20 +17,6 @@ function App() {
   const initializeBooks = useStore((state) => state.initializeBooks);
 
   useEffect(() => {
-    const checkUser = async () => {
-      if (user) return;
-      const { data, error } = await supabase.auth.getUser();
-
-      if (error) {
-        console.error(error);
-        return;
-      }
-
-      setUser(data.user as User);
-    }
-
-    checkUser();
-
     supabase.auth.getSession().then(({ data: { session }}) => {
       setSession(session);
     });
@@ -39,6 +25,8 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      if (session?.user) setUser(session.user as User);
+
       if (_event === "SIGNED_IN" && session) setUser(session.user);
       if (_event === "SIGNED_OUT") removeUser();
     });
