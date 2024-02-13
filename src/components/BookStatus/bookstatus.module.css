@@ -1,0 +1,20 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-container {
+  list-style: none;
+  position: absolute;
+  top: 2.75rem;
+  width: 100%;
+  border: 2px solid var(--border-color);
+  background-color: var(--button-bg-color);
+  border-radius: 0.5rem;
+
+  button {
+    width: 100%;
+    padding: 0.5rem;
+  }
+}

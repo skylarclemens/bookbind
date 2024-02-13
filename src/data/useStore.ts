@@ -7,6 +7,7 @@ interface Store {
   initializeBooks: (books: UserBook[]) => void,
   addBook: (book: UserBook) => void,
   addBooks: (books: UserBook[]) => void,
+  updateBook: (book: UserBook) => void,
   removeBook: (book: UserBook) => void,
   removeAllBooks: () => void
 }
@@ -22,6 +23,7 @@ export const useStore = create<Store>((set) => ({
   initializeBooks: (books: UserBook[]) => set(() => ({ books: books })),
   addBook: (book: UserBook) => set((state) => ({ books: [...state.books, book] })),
   addBooks: (books: UserBook[]) => set((state) => ({ books: [...state.books, ...books]})),
+  updateBook: (book: UserBook) => set((state) => ({ books: state.books.map((curr) => curr.id === book.id ? book : curr)})),
   removeBook: (book: UserBook) => set((state) => ({ books: state.books.filter((curr) => curr.book_id !== book.book_id)})),
   removeAllBooks: () => set({ books: [] }),
 }))
