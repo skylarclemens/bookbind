@@ -30,9 +30,9 @@
   --bg-color: #ffffff;
   --secondary-bg-color: #F9F8F6;
   --border-color: rgba(231, 228, 222, 1);
-  --font-color: rgb(33, 53, 71);
+  --font-color: rgba(47, 47, 47, 1);
   --body-font-color: rgba(0, 0, 0, 0.8);
-  --secondary-font-color: rgba(33, 53, 71, 0.75);
+  --secondary-font-color: rgba(47, 47, 47, 0.75);
   --link-color: #646cff;
   --link-hover-color: #747bff;
   --button-bg-color: #f9f9f9;
