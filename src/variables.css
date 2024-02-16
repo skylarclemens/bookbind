@@ -30,15 +30,17 @@
   --bg-color: #ffffff;
   --secondary-bg-color: #F9F8F6;
   --border-color: rgba(231, 228, 222, 1);
-  --font-color: rgb(33, 53, 71);
+  --font-color: rgba(47, 47, 47, 1);
   --body-font-color: rgba(0, 0, 0, 0.8);
-  --secondary-font-color: rgba(33, 53, 71, 0.75);
+  --secondary-font-color: rgba(47, 47, 47, 0.75);
   --link-color: #646cff;
   --link-hover-color: #747bff;
   --button-bg-color: #f9f9f9;
   --button-border-color: rgba(122, 119, 115, 0.5);
   --cta-font-color: rgba(97, 97, 97, 1);
   --cta-button-bg-color: rgba(255, 255, 255, 0.9);
+  --text-hide-gradient-start: rgba(255,255,255,0);
+  --text-hide-gradient-end: rgba(255,255,255,1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,6 +55,8 @@
     --button-bg-color: #1a1a1a;
     --cta-font-color: rgba(255, 255, 255, 0.8);
     --cta-button-bg-color: rgba(26, 26, 26, 0.9);
+    --text-hide-gradient-start: rgba(0,0,0,0);
+    --text-hide-gradient-end: rgba(0,0,0,1);
   }
   a:hover {
     color: var(--link-hover-color);

@@ -2,19 +2,18 @@ import style from './book.module.css';
 import { useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { BookResult } from '../../components/Search/Search';
-import { useStore, useUserStore } from '../../data/useStore';
+import BookStatus from '../../components/BookStatus/BookStatus';
+import { useStore } from '../../data/useStore';
 import { Book, UserBook } from '../../data/definitions';
 import { mapToBook } from '../../helpers/mapToBook';
-import { addBookToDb, removeBookFromDb } from '../../services/bookService';
+import { IoBook, IoCalendar, IoNewspaper } from 'react-icons/io5';
 
 const BookDetails = () => {
   const bookResult = useLoaderData() as BookResult;
   const [book, setBook] = useState<Book>();
+  const [showDescriptionText, setShowDescriptionText] = useState<boolean>(false);
   const [userBookInfo, setUserBookInfo] = useState<UserBook>();
   const books = useStore((state) => state.books);
-  const addBook = useStore((state) => state.addBook);
-  const removeBook = useStore((state) => state.removeBook);
-  const user = useUserStore((state) => state.user);
 
   useEffect(() => {
     setBook(mapToBook(bookResult));
@@ -38,20 +37,6 @@ const BookDetails = () => {
     return 'Loading...';
   }
 
-  const addCurrentBook = async (book: Book) => {
-    if (user) {
-      const newUserBook: UserBook = await addBookToDb(book, user.id);
-      addBook(newUserBook);
-    }
-  }
-
-  const removeCurrentBook = (userBook?: UserBook) => {
-    if (user && userBook) {
-      removeBookFromDb(userBook.book.id);
-      removeBook(userBook);
-    }
-  }
-
   const formatCategories = (categories: string[]) => {
     const newCategories = categories.map((category) => {
       const str = category.split('/')
@@ -67,10 +52,7 @@ const BookDetails = () => {
           <div className={style.coverContainer}>
             <img className={style.cover} src={book.images.thumbnail} alt={`${book.title} book cover`} />
           </div>
-          {userBookInfo ?
-            (<button className="cta" onClick={() => removeCurrentBook(userBookInfo)}>Remove</button>) :
-            (<button className="cta" onClick={() => addCurrentBook(book)}>Add</button>)
-          }
+          <BookStatus userBook={userBookInfo} book={book} />
         </div>
         <div className={style.detailsRight}>
           <div className={style.title}>
@@ -84,9 +66,38 @@ const BookDetails = () => {
               })}
             </div>
           </div>
-          <div className={style.description}>
+          <div className={style.descriptionContainer}>
             <h3 className="subheadline">Description</h3>
-            <div className="body" dangerouslySetInnerHTML={{ __html: book.description as string}}></div>
+            <div className={`${style.description} ${!showDescriptionText && style.descriptionOverlay}`}>
+              <div className="body" dangerouslySetInnerHTML={{ __html: book.description as string}}></div>
+              <button className={style.showDescription} onClick={() => setShowDescriptionText(!showDescriptionText)}>Show {`${showDescriptionText ? 'less' : 'more'}`}</button>
+            </div>
+          </div>
+          <div className={style.detailsContainer}>
+            <h3 className="subheadline">Details</h3>
+            <div className={style.details}>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoBook /></div>
+                  Pages
+                </div>
+                <span>{book.pageCount}</span>
+              </div>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoCalendar /></div>
+                  Released
+                </div>
+                <span>{book.publishedDate}</span>
+              </div>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoNewspaper /></div>
+                  Publisher
+                </div>
+                <span>{book.publisher}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
