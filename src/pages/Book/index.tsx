@@ -6,6 +6,7 @@ import BookStatus from '../../components/BookStatus/BookStatus';
 import { useStore } from '../../data/useStore';
 import { Book, UserBook } from '../../data/definitions';
 import { mapToBook } from '../../helpers/mapToBook';
+import { IoBook, IoCalendar, IoNewspaper } from 'react-icons/io5';
 
 const BookDetails = () => {
   const bookResult = useLoaderData() as BookResult;
@@ -70,6 +71,32 @@ const BookDetails = () => {
             <div className={`${style.description} ${!showDescriptionText && style.descriptionOverlay}`}>
               <div className="body" dangerouslySetInnerHTML={{ __html: book.description as string}}></div>
               <button className={style.showDescription} onClick={() => setShowDescriptionText(!showDescriptionText)}>Show {`${showDescriptionText ? 'less' : 'more'}`}</button>
+            </div>
+          </div>
+          <div className={style.detailsContainer}>
+            <h3 className="subheadline">Details</h3>
+            <div className={style.details}>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoBook /></div>
+                  Pages
+                </div>
+                <span>{book.pageCount}</span>
+              </div>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoCalendar /></div>
+                  Released
+                </div>
+                <span>{book.publishedDate}</span>
+              </div>
+              <div className={style.detail}>
+                <div className={style.detailType}>
+                  <div className={style.detailIcon}><IoNewspaper /></div>
+                  Publisher
+                </div>
+                <span>{book.publisher}</span>
+              </div>
             </div>
           </div>
         </div>
