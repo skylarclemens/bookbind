@@ -10,6 +10,7 @@ import { mapToBook } from '../../helpers/mapToBook';
 const BookDetails = () => {
   const bookResult = useLoaderData() as BookResult;
   const [book, setBook] = useState<Book>();
+  const [showDescriptionText, setShowDescriptionText] = useState<boolean>(false);
   const [userBookInfo, setUserBookInfo] = useState<UserBook>();
   const books = useStore((state) => state.books);
 
@@ -64,9 +65,12 @@ const BookDetails = () => {
               })}
             </div>
           </div>
-          <div className={style.description}>
+          <div className={style.descriptionContainer}>
             <h3 className="subheadline">Description</h3>
-            <div className="body" dangerouslySetInnerHTML={{ __html: book.description as string}}></div>
+            <div className={`${style.description} ${!showDescriptionText && style.descriptionOverlay}`}>
+              <div className="body" dangerouslySetInnerHTML={{ __html: book.description as string}}></div>
+              <button className={style.showDescription} onClick={() => setShowDescriptionText(!showDescriptionText)}>Show {`${showDescriptionText ? 'less' : 'more'}`}</button>
+            </div>
           </div>
         </div>
       </div>
