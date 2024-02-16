@@ -10,6 +10,34 @@
   border-bottom: 1px solid rgba(151, 148, 143, 0.25);
   background: var(--bg-color);
   z-index: 1;
+
+  .searchbar {
+    display: none;
+    &.show {
+      display: flex;
+    }
+
+    @media screen and (min-width: 800px) {
+      display: flex;
+      flex: 1;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    .search-button {
+      display: none;
+    }
+  }
+}
+
+.menu-button {
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+}
+
+.menu {
+  display: none;
 }
 
 .nav-left {
