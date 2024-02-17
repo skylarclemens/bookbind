@@ -7,11 +7,11 @@ const Nav = () => {
     <div className={style.container}>
       <div className={style.navLeft}>
         <Link to={'/'} className={style.logo}>Bookbind</Link>
-        <div>
-          <Link to={''}>Library</Link>
-        </div>
+        <Link to={'/'}>Library</Link>
       </div>
-      <Search />
+      <div className={style.searchbar}>
+        <Search />
+      </div>
     </div>
   )
 }

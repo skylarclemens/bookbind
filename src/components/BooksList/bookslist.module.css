@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.25rem;
+
+  @media screen and (min-width: 800px) {
+    padding: 1rem;
+  }
 }
 
 .status-container {
@@ -28,5 +32,10 @@
 
 .book-cards-list {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+
+  @media screen and (min-width: 800px) {
+    flex-direction: row;
+  }
 }

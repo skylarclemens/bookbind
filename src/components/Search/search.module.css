@@ -6,7 +6,7 @@
 
   & input {
     min-height: 36px;
-    min-width: 450px;
+    min-width: 90%;
     background: var(--secondary-bg-color);
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
@@ -20,6 +20,12 @@
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' width='10' height='10' overflow='visible' stroke='rgb(61, 61, 61)' stroke-width='2' stroke-linecap='round'><line x1='0' y1='0' x2='10' y2='10' /><line x1='10' y1='0' x2='0' y2='10' /></svg>");
     }
   }
+
+  @media screen and (min-width: 800px) {
+    & input {
+      min-width: 450px;
+    }
+  }
 }
 
 .search-results {
@@ -28,13 +34,17 @@
   top: 3.5rem;
   left: 0;
   right: 0;
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   overflow: hidden;
   z-index: 1;
   padding: 0;
+
+  @media screen and (min-width: 800px) {
+    width: 60%;
+  }
 
   li {
     list-style-type: none;

@@ -8,14 +8,23 @@
   width: 100%;
   padding: 0 1rem;
   border-bottom: 1px solid rgba(151, 148, 143, 0.25);
-  background: var(--bg-color);
+  background-color: var(--bg-nav-color);
+  backdrop-filter: blur(50px);
   z-index: 1;
+
+  .searchbar {
+    display: flex;
+    flex: 1;
+  }
 }
 
 .nav-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  display: none;
+  @media screen and (min-width: 800px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 }
 
 .logo {
