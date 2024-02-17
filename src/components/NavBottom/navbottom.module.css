@@ -1,0 +1,27 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-nav-color);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+
+  @media screen and (min-width: 800px) {
+    display: none;
+  }
+
+  .nav-link {
+    color: var(--cta-font-color);
+    &.active {
+      color: var(--link-color);
+    }
+  }
+}
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

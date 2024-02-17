@@ -7,6 +7,7 @@ import { useStore, useUserStore } from './data/useStore';
 import { Session, User } from '@supabase/supabase-js';
 import { Outlet } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
+import NavBottom from './components/NavBottom/NavBottom';
 import { getUsersBooksData } from './services/bookService';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
       <div className={style.container}>
         <Nav />
         <Outlet />
+        <NavBottom />
       </div>
     )
   }

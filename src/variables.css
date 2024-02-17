@@ -41,6 +41,7 @@
   --cta-button-bg-color: rgba(255, 255, 255, 0.9);
   --text-hide-gradient-start: rgba(255,255,255,0);
   --text-hide-gradient-end: rgba(255,255,255,1);
+  --bg-nav-color: rgba(255, 255, 255, 0.8);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,6 +58,7 @@
     --cta-button-bg-color: rgba(26, 26, 26, 0.9);
     --text-hide-gradient-start: rgba(0,0,0,0);
     --text-hide-gradient-end: rgba(0,0,0,1);
+    --bg-nav-color: rgba(36, 36, 36, 0.8);
   }
   a:hover {
     color: var(--link-hover-color);

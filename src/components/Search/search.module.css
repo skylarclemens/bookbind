@@ -1,7 +1,5 @@
 .container {
-  position: absolute;
-  top: 36px;
-  left: 0;
+  position: relative;
   display: flex;
   justify-content: center;
   flex: 1;
@@ -24,10 +22,6 @@
   }
 
   @media screen and (min-width: 800px) {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: auto;
     & input {
       min-width: 450px;
     }
@@ -40,13 +34,17 @@
   top: 3.5rem;
   left: 0;
   right: 0;
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   overflow: hidden;
   z-index: 1;
   padding: 0;
+
+  @media screen and (min-width: 800px) {
+    width: 60%;
+  }
 
   li {
     list-style-type: none;
