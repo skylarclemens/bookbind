@@ -12,7 +12,7 @@ const NavBottom = () => {
           isPending ? `${style.navLink} ${style.pending}` : `${style.navLink}`}>
         <div className={style.navButton}>
           <IoBook />
-          <span>Library</span>
+          <span className={style.label}>Library</span>
         </div>
       </NavLink>
     </div>
